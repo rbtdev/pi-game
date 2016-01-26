@@ -1,3 +1,5 @@
+from paddle import Paddle
+
 class Player:
 	def __init__(self, name, buttonPin, ledPin):
 		self.name = name
