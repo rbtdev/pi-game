@@ -1,7 +1,17 @@
 from time import sleep
 from players import Players
+import Questions
 
 
+board = new Questions.Board()
+
+science = Category("Science")
+science.questions.append(
+	Question(
+		"This is the question",
+		"This is the answer",
+		100))
+board.categories.append(science)
 
 players = Players()
 players.add("Player 1")
