@@ -1,10 +1,10 @@
 from paddle import Paddle
 
 class Player:
-	def __init__(self, name, buttonPin, ledPin):
+	def __init__(self, name, buttonPin, ledPin, buttonPressCb):
 		self.name = name
 		self.score = 0
-		self.paddle = Paddle(self, buttonPin, ledPin)
+		self.paddle = Paddle(self, buttonPin, ledPin, buttonPressCb)
 	def enable(self):
 		self.paddle.enable()
 

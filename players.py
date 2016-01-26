@@ -23,3 +23,8 @@ class Players:
 	def add(self, player):
 		self.list.append(player)
 
+	def buttonPressed(paddle):
+		self.disable()
+		players.setCurrent(paddle.owner)
+		palyers.buttonPushedEvent.set()
+

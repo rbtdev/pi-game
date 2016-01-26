@@ -5,14 +5,8 @@ from players import Players
 
 
 players = Players()
-players.add(Player("Player 1",17,13))
-players.add(Player("Player 2",22,26))
-
-
-def buttonPressed(paddle):
-		palyers.disable()
-		players.setCurrent(paddle.owner)
-		palyers.buttonPushedEvent.set()
+players.add(Player("Player 1",17,13, players.buttonPressed))
+players.add(Player("Player 2",22,26, players.buttonPressed))
 		
 while True:
 	players.setCurrent(None)
