@@ -1,4 +1,4 @@
-import paddle
+from paddle import Paddle
 from time import sleep
 import threading
 	
