@@ -1,5 +1,6 @@
 from gpiozero import Button, LED
 from datetime import datetime
+import game
 
 class Paddle:
 	def __init__(self, owner, buttonPin, ledPin):
@@ -18,11 +19,6 @@ class Paddle:
 	def handleButtonPress(self):
 		self.pressedAt = datetime.now()
 		print(self.pressedAt)
-		buttonPressed(self)
+		players.buttonPressed(self)
 
 
-def buttonPressed(paddle):
-	global players
-	players.disable()
-	players.setCurrent(paddle.owner)
-	players.buttonPushedEvent.set()
