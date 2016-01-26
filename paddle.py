@@ -1,6 +1,6 @@
 from gpiozero import Button, LED
 from datetime import datetime
-from game imort buttonPressed
+from game import buttonPressed
 
 class Paddle:
 	def __init__(self, owner, buttonPin, ledPin):
