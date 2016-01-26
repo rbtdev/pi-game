@@ -1,20 +1,12 @@
 import threading
+from paddle import Paddle
+from player import Player
 
 class Players:
 	def __init__(self):
 		self.list = []
 		self.current = None
 		self.buttonPushedEvent = threading.Event()
-		self.pins = [
-			{
-				buttonPin: 17 ,
-				ledPin: 13 ,
-			},
-			{
-				buttonPin: 22 ,
-				ledPin: 26 ,
-			}
-		]
 
 	def setCurrent(player):
 		self.current = player
@@ -30,9 +22,9 @@ class Players:
 	def setCurrent(self, player):
 		self.current = player
 	
-	def add(self, name, buttonPin, ledPin):
-
-		self.list.append(Player(name, buttonPin, ledPin, self.buttonPressed))
+	def add(self, name):
+		paddle = Paddle(len(self.list), self.buttonPressed)	
+		self.list.append(Player(name, paddle))
 
 	def buttonPressed(self, paddle):
 		self.disable()
