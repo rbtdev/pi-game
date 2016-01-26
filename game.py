@@ -9,6 +9,11 @@ players.add(Player("Player 1",17,13))
 players.add(Player("Player 2",22,26))
 
 
+def (self, paddle):
+		palyers.disable()
+		players.setCurrent(paddle.owner)
+		palyers.buttonPushedEvent.set()
+		
 while True:
 	players.setCurrent(None)
 	players.buttonPushedEvent.clear()
