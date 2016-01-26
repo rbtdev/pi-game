@@ -19,3 +19,10 @@ class Paddle:
 		self.pressedAt = datetime.now()
 		print(self.pressedAt)
 		buttonPressed(self)
+
+
+def buttonPressed(paddle):
+	global players
+	players.disable()
+	players.setCurrent(paddle.owner)
+	players.buttonPushedEvent.set()
