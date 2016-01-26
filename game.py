@@ -1,5 +1,4 @@
 from time import sleep
-from paddle import Paddle
 from player import Player
 from players import Players
 
