@@ -10,10 +10,10 @@ class Category:
 		self.name = name
 		self.questions = []
 
-	def addQuestion(self, question)
+	def addQuestion(self, question):
 		self.questions.append(question)
 
 class Board:
 	def __init__(self):
-			categories: []
+		self.categories = []
 
