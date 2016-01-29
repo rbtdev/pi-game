@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+       var blink_ws = new WebSocket("ws://192.168.1.148:5000/blink");
+       blink_ws.onopen = function() {
+           console.log("Blink socket open.");
+       };
+       blink_ws.onclose = function(evt) {
+	   console.log("Blink socket closed.");
+       };
+       blink_ws.onmessage = function(evt) {
+           console.log("Blink socket message: " + evt.data);
+       };
+       function on() {
+         blink_ws.send("on");
+       }
+
+       function off() {
+         blink_ws.send("off")
+       } 
+
+       var button_ws = new WebSocket("ws://192.168.1.148:5000/button");
+       button_ws.onopen = function() {
+           console.log("Button socket open.");
+       };
+       button_ws.onclose = function(evt) {
+           console.log("Button socket closed.");
+       };
+       button_ws.onmessage = function(evt) {
+           console.log("Button socket message: " + evt.data);
+       };
+      
+    </script>
+    <button onclick="on()">On</button>
+    <button onclick="off()">Off</button>
+  </head>
+</html>

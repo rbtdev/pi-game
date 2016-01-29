@@ -45,11 +45,12 @@ for category in board.categories:
 		
 		players.setCurrent(None)
 		players.buttonPushedEvent.clear()
+		players.enable()
 		players.buttonPushedEvent.wait(10)
 		if players.current != None:
 			print(players.current.name)
 			players.current.on()
-			print("%s - Please Answer. You have 10 seconds - " (players.current.name ))
+			print("%s - Please Answer. You have 10 seconds - "% (players.current.name ))
 			sleep(3)
 			players.current.off()
 			correct = raw_input("Did you get it right?")
@@ -57,7 +58,7 @@ for category in board.categories:
 				players.current.score+=question.points
 			else:
 				players.current.score -= question.points
-			print("%s - your score is now %d" % (players.current.score))
+			print("%s - your score is now %d" % (players.current.name, players.current.score))
 		else:
 			print("Nobody buzzed.!")
 			print("The answer is: %s" %(question.answer))
