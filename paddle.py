@@ -29,7 +29,7 @@ class Paddle:
 	
 	def handleButtonPress(self):
 		self.pressedAt = datetime.now()
-		self.buttonPressCb(self)()
+		self.buttonPressCb(self)
 
 	def on(self):
 		self.led.on()
