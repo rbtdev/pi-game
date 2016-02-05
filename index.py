@@ -12,7 +12,7 @@ sockets = Sockets(app)
 paddles = Paddles()
 
 button_ws = None
-@sockets.route('/button')
+@sockets.route('/paddle')
 def button_socket(ws):
     global button_ws
     button_ws = ws
