@@ -23,7 +23,7 @@ def button_socket(ws):
     while True:
         data = ws.receive()
         message = json.loads(data)
-        if (message['event'] == "reset")
+        if (message['event'] == "reset"):
             paddles.reset()
 
 def buttonPressed():
