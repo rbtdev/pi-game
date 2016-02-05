@@ -35,9 +35,9 @@ def buttonPressed():
         'paddleId': str(paddles.current.id)
     }
     button_ws.send(json.dumps(message))
-    paddles.setCurrent(None)
-    paddles.buttonPushedEvent.clear()
-    paddles.enable() 
+    # paddles.setCurrent(None)
+    # paddles.buttonPushedEvent.clear()
+    # paddles.enable() 
 
 @app.route('/')
 def hello():

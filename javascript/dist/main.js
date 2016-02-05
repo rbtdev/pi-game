@@ -2,21 +2,15 @@
 var Player = require("./player.js")
 var Paddles = require("./paddles.js")
 
-var player1 = new Player("Rob");
-var player2 = new Player("Alyssa")
-
-player1.onpress = function (player) {
-	console.log('Player: ' + player.name + " pressed.");
-}
-
-player2.onpress = function (player) {
-	console.log('Player: ' + player.name + " pressed.");
-}
-
-reset = function () {
+reset = function reset () {
 	Paddles.reset()
 }
 
+init = function init () {
+	console.log("Loaded")
+	var player1 = new Player("Rob", "div1", "blue");
+	var player2 = new Player("Alyssa", "div2", "red")
+}
 },{"./paddles.js":3,"./player.js":4}],2:[function(require,module,exports){
 var wsUrl = "ws://192.168.1.148:5000/button";
 var ws = new WebSocket(wsUrl);
@@ -56,35 +50,41 @@ module.exports = {
 var PaddleIo = require('./paddleIo.js');
 
 var paddleCount = 0;
+var paddles = [];
+
 function buttonPress (paddleId) {
 	console.log("Button pressed on paddle - " + paddleId);
-	var divId = "paddle" + (paddleId + 1);
-	var paddleDiv = document.getElementById(divId);
-	paddleDiv.style.backgroundColor = "red"
+	paddles[paddleId].element.style.backgroundColor = paddles[paddleId].color;
+}
+
+function reset (paddleId) {
+	PaddleIo.reset();
+	for (var i = 0; i<paddles.length; i++) {
+		PaddleIo.reset(i);
+		paddles[i].element.style.backgroundColor = "white";
+	}
+}
+
+function Paddle (divId, color) {
+	this.id = paddleCount++
+	this.element = document.getElementById(divId);
+	this.color = color;
+	this.element.style.borderColor = color;
+	PaddleIo.register(this.id, 'buttonpress', buttonPress)
+	paddles.push(this)
 }
 
 module.exports = {
-
-	Paddle: function () {
-		this.id = paddleCount++
-		PaddleIo.register(this.id, 'buttonpress', buttonPress)
-	},
-
-	reset: function () {
-		PaddleIo.reset();
-	}
-
+	Paddle: Paddle,
+	reset: reset
 }
 },{"./paddleIo.js":2}],4:[function(require,module,exports){
 var Paddle = require('./paddles.js').Paddle;
 
-function Player (name) {
+function Player (name, divId, color) {
 	this.name = name;
-	this.paddle = new Paddle();
-	this.paddle.onpress = function () {
+	this.paddle = new Paddle(divId, color);
 
-	}
-	this.onpress = null
 	console.log("Player - " + name + " created. Paddle id = " + this.paddle.id)
 }
 
