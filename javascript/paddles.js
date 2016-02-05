@@ -6,13 +6,11 @@ function buttonPress (paddleId) {
 
 }
 
-PaddleIo.onbuttonpress(buttonPress);
-
 module.exports = {
 
 	Paddle: function () {
 		this.id = paddleCount++
-		paddleIo.register(id, buttonPress)
+		PaddleIo.register(this.id, buttonPress)
 	}
 
 }

@@ -10,7 +10,7 @@ ws.onclose = function () {
 }
 
 ws.onmessage = function (evt) {
-	console.log("websocket message: " + evt.data)
+	console.log("websocket message: " + parseInt(evt.data))
 	callbacks[data]()
 }
 

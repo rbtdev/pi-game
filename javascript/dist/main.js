@@ -27,15 +27,14 @@ ws.onclose = function () {
 
 ws.onmessage = function (evt) {
 	console.log("websocket message: " + evt.data)
-	debugger
-	buttonPressCb(evt.data)
+	callbacks[data]()
 }
 
-buttonPressCb = null;
+callbacks = [];
 
 module.exports = {
-	onbuttonpress: function (cb) {
-		buttonPressCb = cb;
+	register: function (id, cb) {
+		callbacks[id] = cb
 	}
 }
 },{}],3:[function(require,module,exports){
@@ -44,14 +43,14 @@ var PaddleIo = require('./paddleIo.js');
 var paddleCount = 0;
 function buttonPress (paddleId) {
 	console.log("Button pressed on paddle - " + paddleId);
-}
 
-PaddleIo.onbuttonpress(buttonPress);
+}
 
 module.exports = {
 
 	Paddle: function () {
 		this.id = paddleCount++
+		PaddleIo.register(this.id, buttonPress)
 	}
 
 }
