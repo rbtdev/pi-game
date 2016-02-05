@@ -24,11 +24,11 @@ def button_socket(ws):
 	   message = ws.receive()
 
 def buttonPressed():
-	global button_ws
+    global button_ws
     button_ws.send(str(paddles.current.id))
-	paddles.setCurrent(None)
+    paddles.setCurrent(None)
     paddles.buttonPushedEvent.clear()
-	paddles.enable() 
+    paddles.enable() 
 
 @app.route('/')
 def hello():
