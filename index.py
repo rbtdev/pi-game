@@ -9,8 +9,6 @@ app.debug = True
 sockets = Sockets(app)
 
 paddles = Paddles()
-paddles.add();
-paddles.add();
 
 button_ws = None
 @sockets.route('/button')
