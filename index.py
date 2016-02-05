@@ -25,6 +25,7 @@ def button_socket(ws):
 
 def buttonPressed():
     global button_ws
+    print('pressed')
     message = {
         'event': 'buttonpress',
         'paddleId': str(paddles.current.id)

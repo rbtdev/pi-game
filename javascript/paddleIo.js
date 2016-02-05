@@ -13,7 +13,7 @@ ws.onmessage = function (evt) {
 	console.log("websocket message: " + evt.data)
 	var message = JSON.parse(evt.data);
 	if (message.event == 'buttonpress') {
-		callbacks[message.paddleId]['buttonpress'](message.[paddleId]);
+		callbacks[message.paddleId].buttonpress(message.paddleId);
 	}
 }
 
@@ -21,6 +21,8 @@ callbacks = []
 
 module.exports = {
 	register: function (id, event, cb) {
-		callbacks[id][event] = cb
+		var chain = callbacks[id] || {};
+		chain[event] = cb;
+		callbacks[id] = chain;
 	}
 }

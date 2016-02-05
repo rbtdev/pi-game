@@ -14,7 +14,7 @@ player2.onpress = function (player) {
 
 
 },{"./player.js":4}],2:[function(require,module,exports){
-var wsUrl = "ws://192.168.1.148:5000/button";
+var wsUrl = "ws://192.168.1.148:5000/paddle";
 var ws = new WebSocket(wsUrl);
 
 ws.onopen = function () {
@@ -26,15 +26,20 @@ ws.onclose = function () {
 }
 
 ws.onmessage = function (evt) {
-	console.log("websocket message: " + parseInt(evt.data))
-	callbacks[evt.data](parseInt(evt.data))
+	console.log("websocket message: " + evt.data)
+	var message = JSON.parse(evt.data);
+	if (message.event == 'buttonpress') {
+		callbacks[message.paddleId].buttonpress(message.paddleId);
+	}
 }
 
-callbacks = [];
+callbacks = []
 
 module.exports = {
-	register: function (id, cb) {
-		callbacks[id] = cb
+	register: function (id, event, cb) {
+		var chain = callbacks[id] || {};
+		chain[event] = cb;
+		callbacks[id] = chain;
 	}
 }
 },{}],3:[function(require,module,exports){
@@ -50,7 +55,7 @@ module.exports = {
 
 	Paddle: function () {
 		this.id = paddleCount++
-		PaddleIo.register(this.id, buttonPress)
+		PaddleIo.register(this.id, 'buttonpress', buttonPress)
 	}
 
 }
