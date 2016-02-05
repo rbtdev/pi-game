@@ -7,8 +7,8 @@ class Paddles:
 		self.current = None
 		self.buttonPushedEvent = threading.Event()
 		self.buttonPressedCb = None
-		self.add(new Paddle());
-		self.add(new Paddle())
+		self.add(Paddle());
+		self.add(Paddle())
 
 	def setCurrent(paddle):
 		self.current = paddle
