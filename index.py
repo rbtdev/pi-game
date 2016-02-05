@@ -11,17 +11,20 @@ sockets = Sockets(app)
 
 paddles = Paddles()
 
+
 button_ws = None
-@sockets.route('/paddle')
+@sockets.route('/button')
 def button_socket(ws):
     global button_ws
     button_ws = ws
     paddles.setCurrent(None)
     paddles.buttonPushedEvent.clear()
     paddles.setButtonPressedCb(buttonPressed)
-    paddles.enable()
     while True:
-	   message = ws.receive()
+        data = ws.receive()
+        message = json.loads(data)
+        if (message['event'] == "reset")
+            paddles.reset()
 
 def buttonPressed():
     global button_ws
