@@ -14,6 +14,7 @@ pins =  [
 
 class Paddle:
 	def __init__(self, paddleId, buttonPressCb):
+		self.id = paddleId
 		self.button = Button(pins[paddleId]['buttonPin'])
 		self.led = LED(pins[paddleId]['ledPin'])
 		self.led.off()
