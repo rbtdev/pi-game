@@ -11,14 +11,13 @@ ws.onclose = function () {
 
 ws.onmessage = function (evt) {
 	console.log("websocket message: " + evt.data)
-	debugger
-	buttonPressCb(evt.data)
+	callbacks[data]()
 }
 
-buttonPressCb = null;
+callbacks = [];
 
 module.exports = {
-	onbuttonpress: function (cb) {
-		buttonPressCb = cb;
+	register: function (id, cb) {
+		callbacks[id] = cb
 	}
 }
