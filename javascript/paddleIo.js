@@ -1,4 +1,4 @@
-var wsUrl = "ws://192.168.1.148:5000/button";
+var wsUrl = "ws://192.168.1.148:5000/paddle";
 var ws = new WebSocket(wsUrl);
 
 ws.onopen = function () {
@@ -10,14 +10,17 @@ ws.onclose = function () {
 }
 
 ws.onmessage = function (evt) {
-	console.log("websocket message: " + parseInt(evt.data))
-	callbacks[data]()
+	console.log("websocket message: " + evt.data)
+	var message = JSON.parse(evt.data);
+	if (message.event == 'buttonpress') {
+		callbacks[message.paddleId]['buttonpress'](message.[paddleId]);
+	}
 }
 
-callbacks = [];
+callbacks = []
 
 module.exports = {
-	register: function (id, cb) {
-		callbacks[id] = cb
+	register: function (id, event, cb) {
+		callbacks[id][event] = cb
 	}
 }

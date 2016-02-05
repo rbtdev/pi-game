@@ -27,7 +27,7 @@ ws.onclose = function () {
 
 ws.onmessage = function (evt) {
 	console.log("websocket message: " + parseInt(evt.data))
-	callbacks[data]()
+	callbacks[evt.data](parseInt(evt.data))
 }
 
 callbacks = [];

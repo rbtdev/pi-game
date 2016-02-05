@@ -25,7 +25,11 @@ def button_socket(ws):
 
 def buttonPressed():
     global button_ws
-    button_ws.send(str(paddles.current.id))
+    message = {
+        'event': 'buttonpress',
+        'paddleId': str(paddles.current.id)
+    }
+    button_ws.send(json.dumps(message))
     paddles.setCurrent(None)
     paddles.buttonPushedEvent.clear()
     paddles.enable() 
