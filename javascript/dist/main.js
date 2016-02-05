@@ -14,7 +14,7 @@ player2.onpress = function (player) {
 
 
 },{"./player.js":4}],2:[function(require,module,exports){
-var wsUrl = "ws://192.168.1.148:5000/paddle";
+var wsUrl = "ws://192.168.1.148:5000/button";
 var ws = new WebSocket(wsUrl);
 
 ws.onopen = function () {

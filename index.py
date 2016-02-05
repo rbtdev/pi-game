@@ -18,6 +18,7 @@ def button_socket(ws):
     global button_ws
     button_ws = ws
     paddles.setCurrent(None)
+    paddles.enable()
     paddles.buttonPushedEvent.clear()
     paddles.setButtonPressedCb(buttonPressed)
     while True:
