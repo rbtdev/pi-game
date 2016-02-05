@@ -10,12 +10,12 @@ class Paddles:
 		self.add();
 		self.add()
 
-	def reset():
+	def reset(self):
 		for paddle in self.list:
 			paddle.off()
 			paddle.enable()
-			
-	def setCurrent(paddle):
+
+	def setCurrent(self, paddle):
 		self.current = paddle
 	
 	def enable(self):

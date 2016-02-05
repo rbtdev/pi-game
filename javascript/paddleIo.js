@@ -13,7 +13,7 @@ ws.onmessage = function (evt) {
 	console.log("websocket message: " + evt.data)
 	var message = JSON.parse(evt.data);
 	if (message.event == 'buttonpress') {
-		callbacks[message.paddleId].buttonpress(message.paddleId);
+		callbacks[message.paddleId].buttonpress(parseInt(message.paddleId));
 	}
 }
 
@@ -24,5 +24,11 @@ module.exports = {
 		var chain = callbacks[id] || {};
 		chain[event] = cb;
 		callbacks[id] = chain;
+	},
+	reset: function () {
+		var resetMessage = {
+			'event': 'reset'
+		}
+		ws.send(JSON.stringify(resetMessage));
 	}
 }
