@@ -2,6 +2,7 @@ from paddles import Paddles
 from time import sleep
 from flask import Flask, render_template
 from flask_sockets import Sockets
+import json
 
 app = Flask(__name__)
 app.debug = True
@@ -24,9 +25,10 @@ def button_socket(ws):
 
 def buttonPressed():
 	global button_ws
-        button_ws.send(paddles.current.id)
+    print(str(paddles.current.id))
+    button_ws.send(str(paddles.current.id))
 	paddles.setCurrent(None)
-        paddles.buttonPushedEvent.clear()
+    paddles.buttonPushedEvent.clear()
 	paddles.enable() 
 
 @app.route('/')

@@ -33,8 +33,6 @@ class Paddles:
 
 	def buttonPressed(self, paddle):
 		self.disable()
-		if (self.current != None):
-			self.current.off()
 		self.setCurrent(paddle)
 		paddle.on();
 		self.buttonPushedEvent.set()
