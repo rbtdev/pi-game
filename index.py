@@ -25,7 +25,6 @@ def button_socket(ws):
 
 def buttonPressed():
 	global button_ws
-    print(str(paddles.current.id))
     button_ws.send(str(paddles.current.id))
 	paddles.setCurrent(None)
     paddles.buttonPushedEvent.clear()
