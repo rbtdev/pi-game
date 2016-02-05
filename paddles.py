@@ -14,7 +14,7 @@ class Paddles:
 		for paddle in self.list:
 			paddle.off()
 			paddle.enable()
-		this.current = None
+		self.current = None
 
 	def setCurrent(self, paddle):
 		self.current = paddle
