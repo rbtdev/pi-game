@@ -1,38 +1,27 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript">
-       var blink_ws = new WebSocket("ws://192.168.1.148:5000/blink");
-       blink_ws.onopen = function() {
-           console.log("Blink socket open.");
-       };
-       blink_ws.onclose = function(evt) {
-	   console.log("Blink socket closed.");
-       };
-       blink_ws.onmessage = function(evt) {
-           console.log("Blink socket message: " + evt.data);
-       };
-       function on() {
-         blink_ws.send("on");
-       }
-
-       function off() {
-         blink_ws.send("off")
-       } 
-
-       var button_ws = new WebSocket("ws://192.168.1.148:5000/button");
-       button_ws.onopen = function() {
-           console.log("Button socket open.");
-       };
-       button_ws.onclose = function(evt) {
-           console.log("Button socket closed.");
-       };
-       button_ws.onmessage = function(evt) {
-           console.log("Button socket message: " + evt.data);
-       };
-      
-    </script>
-    <button onclick="on()">On</button>
-    <button onclick="off()">Off</button>
-  </head>
+<head>
+<link rel="stylesheet" type="text/css" href="game.css">
+<script src = './dist/main.js'></script>
+</head>
+<body>
+	<div id = "board" class = "board"></div>
+	<div id = "controls" class = "controls">
+		<div id = "players" class = "players"></div>
+		<div id = "message-box">
+			<div>
+				<span id = "message"></span>
+			</div>
+		</div>
+		<div id = "question-box">
+			<div>
+				Question: <span id = "question"></span>
+			</div>
+			<div>
+				Answer: <span id = "answer"></span>
+			</div>
+		</div>
+		<button id = "right">Correct</button>
+		<button id = "wrong">Incorrect</button>
+	</div>
+</body>
 </html>
