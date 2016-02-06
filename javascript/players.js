@@ -23,8 +23,8 @@ reset = function reset () {
 	Paddles.reset()
 }
 
-disable = function disable(players) {
-	Paddles.disable(players)
+disable = function disable() {
+	Paddles.disable()
 }
 
 module.exports = {

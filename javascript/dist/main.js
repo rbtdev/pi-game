@@ -11,17 +11,17 @@ reset = function reset () {
 }
 
 start = function start () {
-	//Players.enable();
+	Players.reset();
 	Board.message("Players have 10 seconds to ring in");
 	ringTimer = setTimeout(function () {
-		Board.message("RingIn timeout - disable paddles")
-		//Players.disable();
+		Board.message("Nobody rang in - disabling paddles")
+		Players.disable();
 	}, 10000)
 }
 
 wrong = function wrong () {
 	clearTimeout(playerTimer);
-	//Players.enable()
+	Players.reset()
 	Board.message("Player was WRONG - other players may now ring in")
 	start()
 }
@@ -35,13 +35,14 @@ function playerPressed(playerId) {
 	Board.message("Player " + playerId + ": You have 10 seconds to answer");
 	playTimer = setTimeout(function () {
 		Board.message("Player " + playerId + ": Time is up - Other players ring in.");
-		reset();
+		Players.reset();
 		start();
 	}, 10000)
 }
 
 function boardEventCb(evt) {
 	if (evt.message == "question-displayed") {
+		Players.disable();
 		Board.message("Wait for moderator to finish - green light.");
 		Board.question(evt.data.question);
 		Board.answer(evt.data.answer);
@@ -60,6 +61,7 @@ init = function init () {
 			document.getElementById("players"),
 			playerPressed
 		);
+	Players.disable();
 }
 },{"./board.js":2,"./players.js":5}],2:[function(require,module,exports){
 var Questions = require("./questions.js");
@@ -187,6 +189,7 @@ var ws = new WebSocket(wsUrl);
 
 ws.onopen = function () {
 	console.log("websocket opened.");
+	disable();
 }
 
 ws.onclose = function () {
@@ -214,6 +217,13 @@ module.exports = {
 			'event': 'reset'
 		}
 		ws.send(JSON.stringify(resetMessage));
+	},
+
+	disable: function () {
+		var disableMessage = {
+			'event': 'disable'
+		}
+		ws.send(JSON.stringify(disableMessage));
 	}
 }
 },{}],4:[function(require,module,exports){
@@ -247,6 +257,10 @@ function onPress(onPressCb) {
 	onpress = onPressCb
 }
 
+function disable() {
+	PaddleIo.disable();
+}
+
 function Paddle (element, color) {
 	this.id = paddleCount++
 	this.element =  element;
@@ -260,7 +274,8 @@ function Paddle (element, color) {
 module.exports = {
 	Paddle: Paddle,
 	reset: reset,
-	onPress: onPress
+	onPress: onPress,
+	disable: disable
 }
 },{"./paddleIo.js":3}],5:[function(require,module,exports){
 var Paddles = require("./paddles.js")
@@ -288,9 +303,14 @@ reset = function reset () {
 	Paddles.reset()
 }
 
+disable = function disable() {
+	Paddles.disable()
+}
+
 module.exports = {
 	reset: reset,
-	create: create
+	create: create,
+	disable: disable
 }
 },{"./paddles.js":4}],6:[function(require,module,exports){
 

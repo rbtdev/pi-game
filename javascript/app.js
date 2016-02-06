@@ -41,6 +41,7 @@ function playerPressed(playerId) {
 
 function boardEventCb(evt) {
 	if (evt.message == "question-displayed") {
+		Players.disable();
 		Board.message("Wait for moderator to finish - green light.");
 		Board.question(evt.data.question);
 		Board.answer(evt.data.answer);
@@ -59,4 +60,5 @@ init = function init () {
 			document.getElementById("players"),
 			playerPressed
 		);
+	Players.disable();
 }

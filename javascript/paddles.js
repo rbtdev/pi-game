@@ -28,8 +28,8 @@ function onPress(onPressCb) {
 	onpress = onPressCb
 }
 
-function disable(paddles) {
-	PaddleIo.disable(paddles);
+function disable() {
+	PaddleIo.disable();
 }
 
 function Paddle (element, color) {

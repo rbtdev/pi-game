@@ -3,6 +3,7 @@ var ws = new WebSocket(wsUrl);
 
 ws.onopen = function () {
 	console.log("websocket opened.");
+	disable();
 }
 
 ws.onclose = function () {
@@ -32,11 +33,10 @@ module.exports = {
 		ws.send(JSON.stringify(resetMessage));
 	},
 
-	disable: function (paddles) {
-		paddles = paddles || null;
+	disable: function () {
 		var disableMessage = {
-			'event': 'disable',
-			'data': paddles
+			'event': 'disable'
 		}
+		ws.send(JSON.stringify(disableMessage));
 	}
 }
