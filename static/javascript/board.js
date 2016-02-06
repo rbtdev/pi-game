@@ -76,7 +76,7 @@ function showAnswer (display, id) {
 }
 function create (element, eventCb) {
 	EventCb = eventCb;
-	PlayerDisplay = window.open("./player-board.html", "Player Window");
+	PlayerDisplay = window.open("/player-board.html", "Player Window");
 	PlayerDisplay.addEventListener('load', 
 		function (display, element) {
 			return function () {
