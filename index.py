@@ -10,8 +10,6 @@ app.debug = True
 sockets = Sockets(app)
 
 paddles = Paddles()
-paddles.setButtonPressedCb(buttonPressed)
-
 
 button_ws = None
 @sockets.route('/button')
@@ -21,6 +19,7 @@ def button_socket(ws):
     paddles.setCurrent(None)
     paddles.disable()
     paddles.buttonPushedEvent.clear()
+    paddles.setButtonPressedCb(buttonPressed)
 
     while True:
         data = ws.receive()
