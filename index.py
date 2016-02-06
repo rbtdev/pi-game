@@ -43,7 +43,7 @@ def buttonPressed():
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 
 if __name__ == "__main__":
