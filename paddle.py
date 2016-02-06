@@ -23,9 +23,11 @@ class Paddle:
 
 	def enable(self):
 		self.button.when_pressed = self.handleButtonPress
+		print ("Paddle enabled")
 	
 	def disable(self):
 		self.button.when_pressed = None
+		print ("Paddle disabled")
 	
 	def handleButtonPress(self):
 		self.pressedAt = datetime.now()

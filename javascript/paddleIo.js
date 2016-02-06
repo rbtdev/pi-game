@@ -35,7 +35,7 @@ module.exports = {
 	disable: function (paddles) {
 		paddles = paddles || null;
 		var disableMessage = {
-			'evemt': 'disable',
+			'event': 'disable',
 			'data': paddles
 		}
 	}
