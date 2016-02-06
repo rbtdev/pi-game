@@ -4,7 +4,7 @@ from flask import Flask, render_template
 from flask_sockets import Sockets
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.debug = True
 
 sockets = Sockets(app)
