@@ -10,17 +10,17 @@ reset = function reset () {
 }
 
 start = function start () {
-	//Players.enable();
+	Players.reset();
 	Board.message("Players have 10 seconds to ring in");
 	ringTimer = setTimeout(function () {
-		Board.message("RingIn timeout - disable paddles")
-		//Players.disable();
+		Board.message("Nobody rang in - disabling paddles")
+		Players.disable();
 	}, 10000)
 }
 
 wrong = function wrong () {
 	clearTimeout(playerTimer);
-	//Players.enable()
+	Players.reset()
 	Board.message("Player was WRONG - other players may now ring in")
 	start()
 }
@@ -34,7 +34,7 @@ function playerPressed(playerId) {
 	Board.message("Player " + playerId + ": You have 10 seconds to answer");
 	playTimer = setTimeout(function () {
 		Board.message("Player " + playerId + ": Time is up - Other players ring in.");
-		reset();
+		Players.reset();
 		start();
 	}, 10000)
 }

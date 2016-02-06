@@ -30,5 +30,13 @@ module.exports = {
 			'event': 'reset'
 		}
 		ws.send(JSON.stringify(resetMessage));
+	},
+
+	disable: function (paddles) {
+		paddles = paddles || null;
+		var disableMessage = {
+			'evemt': 'disable',
+			'data': paddles
+		}
 	}
 }

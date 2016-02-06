@@ -28,6 +28,10 @@ function onPress(onPressCb) {
 	onpress = onPressCb
 }
 
+function disable(paddles) {
+	PaddleIo.disable(paddles);
+}
+
 function Paddle (element, color) {
 	this.id = paddleCount++
 	this.element =  element;
@@ -41,5 +45,6 @@ function Paddle (element, color) {
 module.exports = {
 	Paddle: Paddle,
 	reset: reset,
-	onPress: onPress
+	onPress: onPress,
+	disable: disable
 }

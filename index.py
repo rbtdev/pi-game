@@ -26,6 +26,8 @@ def button_socket(ws):
         message = json.loads(data)
         if (message['event'] == "reset"):
             paddles.reset()
+        elif (message['event'] == "disable"):
+            paddles.disable()
 
 def buttonPressed():
     global button_ws
@@ -42,6 +44,7 @@ def buttonPressed():
 @app.route('/')
 def hello():
     return render_template('index.html')
+
 
 if __name__ == "__main__":
 #    app.run(host='0.0.0.0')
