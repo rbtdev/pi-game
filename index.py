@@ -10,6 +10,7 @@ app.debug = True
 sockets = Sockets(app)
 
 paddles = Paddles()
+paddles.setButtonPressedCb(buttonPressed)
 
 
 button_ws = None
@@ -18,9 +19,9 @@ def button_socket(ws):
     global button_ws
     button_ws = ws
     paddles.setCurrent(None)
-    paddles.enable()
+    paddles.disable()
     paddles.buttonPushedEvent.clear()
-    paddles.setButtonPressedCb(buttonPressed)
+
     while True:
         data = ws.receive()
         message = json.loads(data)
