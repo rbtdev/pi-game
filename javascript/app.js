@@ -1,12 +1,62 @@
-var Player = require("./player.js")
-var Paddles = require("./paddles.js")
+var Board = require("./board.js");
+var Players = require("./players.js");
+
+var ringTimer;
+var playTimer;
+var currentPlayer;
 
 reset = function reset () {
-	Paddles.reset()
+	Players.reset()
+}
+
+start = function start () {
+	//Players.enable();
+	Board.message("Players have 10 seconds to ring in");
+	ringTimer = setTimeout(function () {
+		Board.message("RingIn timeout - disable paddles")
+		//Players.disable();
+	}, 10000)
+}
+
+wrong = function wrong () {
+	clearTimeout(playerTimer);
+	//Players.enable()
+	Board.message("Player was WRONG - other players may now ring in")
+	start()
+}
+
+rignt = function right () {
+
+}
+function playerPressed(playerId) {
+	clearTimeout(ringTimer);
+	currentPlayer = playerId
+	Board.message("Player " + playerId + ": You have 10 seconds to answer");
+	playTimer = setTimeout(function () {
+		Board.message("Player " + playerId + ": Time is up - Other players ring in.");
+		reset();
+		start();
+	}, 10000)
+}
+
+function boardEventCb(evt) {
+	if (evt.message == "question-displayed") {
+		Board.message("Wait for moderator to finish - green light.");
+		Board.question(evt.data.question);
+		Board.answer(evt.data.answer);
+	} else if (evt.message == "start-timer") {
+		start();
+	}
 }
 
 init = function init () {
-	console.log("Loaded")
-	var player1 = new Player("Rob", "div1", "blue");
-	var player2 = new Player("Alyssa", "div2", "red")
+	Board.create("board", boardEventCb); 
+	Players.create(
+		[
+			{ name: "Rob", color: "blue" },
+			{ name: "Alyssa", color: "red" }
+		],
+			document.getElementById("players"),
+			playerPressed
+		);
 }

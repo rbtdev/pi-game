@@ -1,0 +1,71 @@
+
+
+.players: {
+	
+}
+
+.player {
+	width: 100px;
+	height: 50px;
+	float: left;
+	margin: 10px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+}
+
+.controls {
+	clear:both;
+}
+
+.board-box {
+	width: 150px;
+	height: 75px;
+	text-align: center;
+	border: 2px solid black;
+	position: relative;
+}
+
+
+.board-text { 
+  position: absolute; 
+  left: 0px; 
+  top: 0px; 
+  width: 100%; 
+  height: 100%; 
+  display: table;
+}
+.board-text p {
+  display: table-cell; 
+  vertical-align: middle; 
+  text-align: center; 
+}
+
+
+.category {
+	float: left;
+}
+
+.category-header {
+	font-size: 40px;
+	background-color: blue;
+}
+
+.question-points {
+	background-color: blue;
+	color: yellow;
+	font-size: 40px;
+}
+
+.question-question {
+	background-color: blue;
+	color: yellow;
+	font-size: 20px;
+}
+
+.question-answer {
+	background-color: blue;
+	color: yellow;
+	font-size: 20px;
+}
+
