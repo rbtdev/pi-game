@@ -1,20 +1,26 @@
-var wsUrl = "ws://192.168.1.148:5000/button";
-var ws = new WebSocket(wsUrl);
+var ws = null;
 
-ws.onopen = function () {
-	console.log("websocket opened.");
-	disable();
-}
+function connect(cb) {
+	var wsUrl = "ws://192.168.1.148:5000/button";
 
-ws.onclose = function () {
-	console.log("websocket closed.");
-}
+	ws = new WebSocket(wsUrl);
 
-ws.onmessage = function (evt) {
-	console.log("websocket message: " + evt.data)
-	var message = JSON.parse(evt.data);
-	if (message.event == 'buttonpress') {
-		callbacks[message.paddleId].buttonpress(parseInt(message.paddleId));
+	ws.onopen = function () {
+		console.log("websocket opened.");
+		disable();
+		cb();
+	}
+
+	ws.onclose = function () {
+		console.log("websocket closed.");
+	}
+
+	ws.onmessage = function (evt) {
+		console.log("websocket message: " + evt.data)
+		var message = JSON.parse(evt.data);
+		if (message.event == 'buttonpress') {
+			callbacks[message.paddleId].buttonpress(parseInt(message.paddleId));
+		}
 	}
 }
 
@@ -38,5 +44,6 @@ module.exports = {
 			'event': 'disable'
 		}
 		ws.send(JSON.stringify(disableMessage));
-	}
+	},
+	connect: connect
 }

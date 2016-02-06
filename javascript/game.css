@@ -1,21 +1,37 @@
 
+#message-box {
+	height: 50px;
+	border: 1px solid black;
+	background-color: yellow;
 
-.players: {
-	
+}
+.players {
+
 }
 
 .player {
-	width: 100px;
-	height: 50px;
-	float: left;
-	margin: 10px;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 50px;
+	font-size: 30px;
+}
+
+.paddle {
+	width: 100px;
+	height: 50px;
+	margin: 10px;
+	display: inline-block;
+}
+
+.score {
+	width: 100px;
+	height: 50px;
+	margin: 10px;
+	display: inline-block;
 }
 
 .controls {
-	clear:both;
+	float:left;
 }
 
 .board-box {
